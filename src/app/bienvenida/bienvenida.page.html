@@ -1,14 +1,30 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title> PruebaApp v0.6</ion-title>
+    <ion-title> PruebaApp v0.8</ion-title>
   </ion-toolbar>
 </ion-header>
 
-  <div id="container">
-     <h1>¡BIENVENIDO!</h1>
-   <ion-button expand="large" href="/tabs/tab1">Comenzar</ion-button>
+<div id="container">
+  <h1>¡BIENVENIDO!</h1>
+
+  <div class="input-container">
+    <ion-input type="email" fill="solid" label="Email" labelPlacement="floating" helperText="Enter your user"
+      errorText="Invalid email" [(ngModel)]="email" required>
+    </ion-input>
+
+    <br />
+    <ion-input type="password" fill="solid" label="Password" labelPlacement="floating" helperText="Enter your password"
+      errorText="Invalid password" [(ngModel)]="password" class="input"></ion-input>
   </div>
- 
+
+  <ion-button
+    expand="large"
+    href="/tabs/tab1"
+    [disabled]="!email || !password">
+    Ingresar
+  </ion-button>
+</div>
+
 
 <ion-footer>
   <ion-toolbar>
