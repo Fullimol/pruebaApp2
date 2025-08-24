@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 2
+      Vibration test
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -9,13 +9,15 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
+      <ion-title size="large">Vibration test</ion-title>
     </ion-toolbar>
   </ion-header>
 
   <div id="container">
-    <p>
-      (aca va todo lo del tab 2)
-    </p>
+    <div class="button-container">
+      <ion-button (click)="vibrar('corta')">Short</ion-button>
+      <ion-button (click)="vibrar('larga')">Long</ion-button>
+    </div>
+
   </div>
 </ion-content>
