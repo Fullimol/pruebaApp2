@@ -1,33 +1,54 @@
-<ion-header>
+<ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title> PruebaApp v0.8</ion-title>
+    <ion-title>
+      pruebaApp v1.00
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<div id="container">
-  <h1>¡BIENVENIDO!</h1>
+<ion-content class="ion-padding">
+  <!-- Centro vertical y horizontal -->
+  <ion-grid class="ion-justify-content-center ion-align-items-center" style="height: 100%;">
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="12" size-md="8" size-lg="6">
 
-  <div class="input-container">
-    <ion-input type="email" fill="solid" label="Email" labelPlacement="floating" helperText="Enter your user"
-      errorText="Invalid email" [(ngModel)]="email" required>
-    </ion-input>
+        <!-- Logo / Imagen -->
+        <ion-img src="https://s3-alpha.figma.com/hub/file/1913095808/a7bdc469-cd70-4ea1-bb57-b59204ad8182-cover.png"
+          alt="Logo" style="width: 140px; height: auto; display: block; margin: 0 auto 24px;">
+        </ion-img>
 
-    <br />
-    <ion-input type="password" fill="solid" label="Password" labelPlacement="floating" helperText="Enter your password"
-      errorText="Invalid password" [(ngModel)]="password" class="input"></ion-input>
-  </div>
+        <!-- Inputs -->
+        <ion-list inset="true" lines="none">
+          <ion-item>
+            <ion-input type="email" label="Email" labelPlacement="floating" fill="solid" helperText="Ingresá tu email"
+              errorText="Email inválido" [(ngModel)]="email" required>
+            </ion-input>
+          </ion-item>
 
-  <ion-button
-    expand="large"
-    href="/tabs/tab1"
-    [disabled]="!email || !password">
-    Ingresar
-  </ion-button>
-</div>
+          <ion-item class="ion-margin-top">
+            <ion-input type="password" label="Password" labelPlacement="floating" fill="solid"
+              helperText="Mínimo 6 caracteres" errorText="Password inválido" [(ngModel)]="password" required>
+            </ion-input>
+          </ion-item>
+        </ion-list>
 
 
-<ion-footer>
-  <ion-toolbar>
-    <ion-title class="ion-text-center"> Bruno Freijomil </ion-title>
-  </ion-toolbar>
-</ion-footer>
+        @if (mensaje) {
+
+        <div class="ion-text-center">
+          <ion-note color="danger">{{ mensaje }}</ion-note>
+        </div>
+        }
+
+
+        <!-- Botón -->
+        <ion-button expand="block" size="large" class="ion-margin-top" [disabled]="!email || !password"
+        style="margin-top: 8vh;"
+          (click)="verificarCredenciales()">
+          Ingresar
+        </ion-button>
+
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

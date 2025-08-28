@@ -1,28 +1,42 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Net Test
-    </ion-title>
+    <!-- Título -->
+    <ion-title>Net Test</ion-title>
+
+    <!-- Botón salir -->
+    <ion-buttons slot="end">
+      <ion-button routerLink="/bienvenida">
+        <ion-icon name="log-out-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="ion-padding ion-text-center">
+  <!-- Header condensado opcional -->
   <ion-header collapse="condense">
     <ion-toolbar>
       <ion-title size="large">Net Test</ion-title>
     </ion-toolbar>
   </ion-header>
 
+  <!-- Contenedor central -->
   <div id="container">
-  
-      <img alt="Silhouette of mountains" [src]="imageUrl" alt="NO INTERNET" />
- 
+    <!-- Imagen -->
+    <ion-img
+      [src]="imageUrl"
+      alt="NO INTERNET"
+      class="imagen-net">
+    </ion-img>
 
-    <ion-button (click)="cambiarImagen()">Search Image</ion-button>
+    <!-- Botón cambiar imagen -->
+    <ion-button expand="block" class="ion-margin-top" (click)="cambiarImagen()">
+      Search Image
+    </ion-button>
+
+    <!-- texto random con ionic: -->
+    <ion-text>
+      <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Unde dolore debitis maiores sed deserunt, esse corporis magni provident, nostrum, sit alias architecto optio natus adipisci blanditiis. Modi enim fugit facere!</p>
+    </ion-text>
   </div>
-
-
-
-
-
 </ion-content>

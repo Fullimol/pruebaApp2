@@ -1,16 +1,21 @@
 import { Component, NgZone } from '@angular/core';
-import { IonHeader, IonToolbar, IonTitle, IonContent, IonButton, IonActionSheet } from '@ionic/angular/standalone';
+import { RouterModule } from '@angular/router';
+import { IonHeader, IonToolbar, IonTitle, IonContent, IonButton, IonActionSheet, IonButtons, IonIcon } from '@ionic/angular/standalone';
+import { addIcons } from 'ionicons';
+import { logOutOutline } from 'ionicons/icons';
 
 @Component({
   selector: 'app-tab3',
   templateUrl: 'tab3.page.html',
   styleUrls: ['tab3.page.scss'],
-  imports: [IonHeader, IonToolbar, IonTitle, IonContent, IonButton, IonActionSheet],
+  imports: [IonIcon, IonButtons, IonHeader, IonToolbar, IonTitle, IonContent, IonButton, IonActionSheet, RouterModule],
 })
 export class Tab3Page {
   valorSeleccionado: string = 'black'
 
-  constructor(private zone: NgZone) { } // esto lo tuve que poner porque sino no cambiaba el color al momento que lo seleccionaba
+  constructor(private zone: NgZone) {
+    addIcons({ 'log-out-outline': logOutOutline });
+  } // esto lo tuve que poner porque sino no cambiaba el color al momento que lo seleccionaba
 
 
   public selectSheetButtons = [
@@ -32,7 +37,7 @@ export class Tab3Page {
     },
     {
       text: 'blue',
-      handler: () => { 
+      handler: () => {
         this.zone.run(() => { // esto lo tuve que poner porque sino no cambiaba el color al momento que lo seleccionaba
           this.valorSeleccionado = 'blue';
         });
@@ -40,7 +45,7 @@ export class Tab3Page {
     },
     {
       text: 'white',
-      handler: () => { 
+      handler: () => {
         this.zone.run(() => { // esto lo tuve que poner porque sino no cambiaba el color al momento que lo seleccionaba
           this.valorSeleccionado = 'white';
         });
