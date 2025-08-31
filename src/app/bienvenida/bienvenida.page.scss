@@ -59,7 +59,16 @@ ion-input {
 .boton-usuario {
   --background: #444444; /* gris oscuro */
   --color: #ffffff;
-  --border-radius: 6px;
-  font-size: 14px;
-  margin-top: 8px;
+  --border-radius: 8px;   /* bordes redondeados */
+  width: 100px;            /* cuadrado: ancho */
+  height: 60px;           /* cuadrado: alto */
+  font-size: 12px;
+  text-align: center;
+}
+
+.usuarios {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 12px; /* espacio entre botones */
 }
