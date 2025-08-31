@@ -32,12 +32,14 @@
  * https://ionicframework.com/docs/theming/dark-mode
  */
 
-/* @import "@ionic/angular/css/palettes/dark.always.css"; */
+@import "@ionic/angular/css/palettes/dark.always.css";
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
-@import '@ionic/angular/css/palettes/dark.system.css';
+// @import '@ionic/angular/css/palettes/dark.system.css'; */  // esto hace que la app cambie modo oscuro/claro segun el dispositivo.
 
+//Esto es porque en el Samsung el ion-header se superpone con la barra de estado. Pero en el xiaomi no... que se yo por qué
+//puse esto para que en el Samsung se vea bien
 ion-header {
-  margin-top: 3.1vh;
+  margin-top: 3.2vh;
 }
 
 // ion-content {
