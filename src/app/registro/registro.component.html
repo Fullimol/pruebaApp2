@@ -1,0 +1,64 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      pruebaApp
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="login-container">
+
+  <ion-grid class="ion-justify-content-center ion-align-items-center" style="height: 100%;">
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="12" size-md="8" size-lg="6">
+
+        <!-- Logo -->
+        <ion-img src="https://s3-alpha.figma.com/hub/file/1913095808/a7bdc469-cd70-4ea1-bb57-b59204ad8182-cover.png"
+          alt="Logo" class="logo"></ion-img>
+
+        <!-- Título -->
+        <h1 class="titulo">Crear Usuario</h1>
+        <p class="subtitulo">Crea una cuenta para ingresar</p>
+
+        <!-- Inputs -->
+        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" novalidate>
+          <ion-list inset="true" lines="none" class="inputs">
+            <ion-item>
+              <ion-input formControlName="email" type="email" label="Email" labelPlacement="floating" fill="solid"
+                helperText="Ingresá tu email" errorText="Email inválido" required></ion-input>
+            </ion-item>
+
+            <ion-item class="ion-margin-top">
+              <ion-input formControlName="password" type="password" label="Contraseña" labelPlacement="floating"
+                fill="solid" helperText="Mínimo 6 caracteres" errorText="Contraseña inválida" required></ion-input>
+            </ion-item>
+
+
+            <ion-item class="ion-margin-top">
+              <ion-input formControlName="repetirPassword" type="password" label="Repite contraseña"
+                labelPlacement="floating" fill="solid" helperText="Mínimo 6 caracteres" errorText="Contraseña inválida"
+                required></ion-input>
+            </ion-item>
+          </ion-list>
+
+          <!-- Mensaje de error -->
+          @if (mensaje) {
+          <div class="ion-text-center">
+            <ion-note color="danger">{{ mensaje }}</ion-note>
+          </div>
+          }
+
+          <!-- Botón principal -->
+          <ion-button type="submit" expand="block" size="large" class="boton-register"
+            [disabled]="registerForm.invalid">
+            Crear usuario
+          </ion-button>
+
+        </form>
+        <ion-button expand="block" size="medium" class="boton-login" routerLink="/bienvenida">
+          Ya tengo usuario
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

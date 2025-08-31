@@ -13,6 +13,11 @@ export const routes: Routes = [
       import('./bienvenida/bienvenida.page').then((m) => m.BienvenidaPage)
   },
   {
+    path: 'registro',
+    loadComponent: () =>
+      import('./registro/registro.component').then((m) => m.RegistroComponent)
+  },
+  {
       path: 'tabs',
       component: TabsPage,
       children: [
