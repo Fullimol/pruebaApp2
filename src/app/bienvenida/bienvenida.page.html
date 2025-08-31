@@ -21,47 +21,48 @@
         <p class="subtitulo">Inicia sesión para continuar</p>
 
         <!-- Inputs -->
-        <ion-list inset="true" lines="none" class="inputs">
-          <ion-item>
-            <ion-input type="email" label="Email" labelPlacement="floating" fill="solid" helperText="Ingresá tu email"
-              errorText="Email inválido" [(ngModel)]="email" required></ion-input>
-          </ion-item>
+        <form [formGroup]="loginForm" (ngSubmit)="onLogin()" novalidate>
+          <ion-list inset="true" lines="none" class="inputs">
+            <ion-item>
+              <ion-input formControlName="email" type="email" label="Email" labelPlacement="floating" fill="solid" helperText="Ingresá tu email"
+                errorText="Email inválido" ></ion-input>
+            </ion-item>
 
-          <ion-item class="ion-margin-top">
-            <ion-input type="password" label="Contraseña" labelPlacement="floating" fill="solid"
-              helperText="Mínimo 6 caracteres" errorText="Password inválido" [(ngModel)]="password"
-              required></ion-input>
-          </ion-item>
-        </ion-list>
+            <ion-item class="ion-margin-top">
+              <ion-input  formControlName="password" type="password" label="Contraseña" labelPlacement="floating" fill="solid"
+                helperText="Mínimo 6 caracteres" errorText="Password inválido"
+                required></ion-input>
+            </ion-item>
+          </ion-list>
 
-        <!-- Mensaje de error -->
-        @if (mensaje) {
-        <div class="ion-text-center">
-          <ion-note color="danger">{{ mensaje }}</ion-note>
-        </div>
-        }
+          <!-- Mensaje de error -->
+          @if (mensaje) {
+          <div class="ion-text-center">
+            <ion-note color="danger">{{ mensaje }}</ion-note>
+          </div>
+          }
 
-        <!-- Botón principal -->
-        <ion-button expand="block" size="large" class="boton-login" [disabled]="!email || !password"
-          (click)="verificarCredenciales()">
-          Ingresar
-        </ion-button>
+          <!-- Botón principal -->
+          <ion-button type="submit" expand="block" size="large" class="boton-login" [disabled]="!loginForm.valid ">
+            Ingresar
+          </ion-button>
+        </form>
 
-         <ion-button expand="block" size="large" class="boton-login" routerLink="/registro">
+        <ion-button expand="block" size="large" class="boton-login" routerLink="/registro">
           Registrarse
         </ion-button>
 
         <!-- Botones de usuarios -->
         <div class="usuarios">
-          <ion-button expand="block" size="medium" class="boton-usuario">
+          <ion-button expand="block" size="medium" class="boton-usuario" (click)="loginTest(1)">
             Ingresar con usuario 1
           </ion-button>
 
-          <ion-button expand="block" size="medium" class="boton-usuario">
+          <ion-button expand="block" size="medium" class="boton-usuario" (click)="loginTest(2)">
             Ingresar con usuario 2
           </ion-button>
 
-          <ion-button expand="block" size="medium" class="boton-usuario">
+          <ion-button expand="block" size="medium" class="boton-usuario" (click)="loginTest(3)">
             Ingresar con usuario 3
           </ion-button>
         </div>

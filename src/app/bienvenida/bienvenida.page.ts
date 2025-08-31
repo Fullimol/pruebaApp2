@@ -1,39 +1,65 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { IonHeader, IonTitle, IonToolbar, IonButton, IonFooter, IonInput, IonNote, IonImg, IonContent, IonList, IonRow, IonGrid, IonCol, IonItem } from '@ionic/angular/standalone';
-import { RouterModule, Router } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { RouterModule, Router, RouterLink } from '@angular/router';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { SupabaseService } from '../services/supabase.service';
 
 @Component({
   selector: 'app-bienvenida',
   templateUrl: './bienvenida.page.html',
   styleUrls: ['./bienvenida.page.scss'],
   standalone: true,
-  imports: [IonItem, IonCol, IonGrid, IonRow, IonList, IonImg, IonNote, IonFooter, IonButton, IonHeader, IonTitle, IonToolbar, RouterModule, IonInput, FormsModule, IonContent]
+  imports: [IonItem, IonCol, IonGrid, IonRow, IonList, IonImg, IonNote, IonButton, IonHeader, IonTitle, IonToolbar, RouterModule, IonInput, FormsModule, IonContent, ReactiveFormsModule, RouterLink]
 })
 
-
 export class BienvenidaPage {
+  private supabase = inject(SupabaseService);
   constructor(private router: Router) { }
-
-  users = <any[]>[
-    { email: "a", password: "a" },
-    { email: "usuario1@prueba.com", password: "1234" }
-  ]
 
   email = ""
   password = ""
   mensaje: string = ""
 
-  // verificar mail y contraseña para pasar login:
-  verificarCredenciales() {
-    const usuario = this.users.find(u => u.email === this.email && u.password === this.password);
-    if (usuario) {
-      console.log("Inicio de sesión exitoso");
-      // Redirigir a la página principal
+  loginForm = new FormGroup({
+    email: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl('', [Validators.required]),
+  })
+
+  //accion de boton login:
+  async onLogin() {
+    if (this.loginForm.invalid) {
+      this.loginForm.markAllAsTouched();
+      return;
+    }
+
+    const { email, password } = this.loginForm.value;
+
+    try {
+      const { user } = await this.supabase.signIn({
+        email: email!,
+        password: password!
+      });
+
+      console.log("Usuario logueado:", user);
+      
       this.router.navigate(['/tabs/tab1']);
-    } else {
-      this.mensaje = "(mail y/o contraseña incorrectos)";
-      console.log("Credenciales inválidas");
+      this.loginForm.reset();
+    } catch (error: any) {
+      console.error("Error en login:", error.message);
     }
   }
+
+  //esto debe completar los campos de los inputs
+  loginTest(userNum: number) {
+    const testUsers = [
+      { email: 'marcela.ramirez@gmail.com', password: '123456' },
+      { email: 'ruben.pablo@yahoo.com', password: '987654' },
+      { email: 'jaimito.gomez@hotmail.com', password: 'pass1897' }
+    ];
+
+    if (userNum >= 1 && userNum <= 3) {
+      this.loginForm.setValue(testUsers[userNum - 1]);
+    }
+  }
+
 }

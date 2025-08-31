@@ -21,7 +21,7 @@
         <p class="subtitulo">Crea una cuenta para ingresar</p>
 
         <!-- Inputs -->
-        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" novalidate>
+        <form [formGroup]="registerForm" (ngSubmit)="onRegister()" novalidate>
           <ion-list inset="true" lines="none" class="inputs">
             <ion-item>
               <ion-input formControlName="email" type="email" label="Email" labelPlacement="floating" fill="solid"

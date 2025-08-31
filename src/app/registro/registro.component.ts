@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { IonImg, IonToolbar, IonContent, IonHeader, IonTitle, IonInput, IonList, IonItem, IonRow, IonCol, IonButton, IonNote, IonGrid, } from "@ionic/angular/standalone";
+import { SupabaseService } from '../services/supabase.service';
 
 @Component({
   selector: 'app-registro',
@@ -10,6 +11,9 @@ import { IonImg, IonToolbar, IonContent, IonHeader, IonTitle, IonInput, IonList,
   imports: [IonNote, IonButton, IonCol, IonRow, IonItem, IonList, IonInput, IonTitle, IonHeader, IonImg, IonToolbar, IonContent, IonGrid, ReactiveFormsModule, RouterLink],
 })
 export class RegistroComponent implements OnInit {
+  private supabase = inject(SupabaseService); // 👈 inyecta el servicio
+  private router = inject(Router); // 👈 para redirigir después del registro
+
   email = ""
   password = ""
   mensaje: string = ""
@@ -23,16 +27,36 @@ export class RegistroComponent implements OnInit {
   })
 
 
-    validarContrasenias(control: AbstractControl): ValidationErrors | null {
+  validarContrasenias(control: AbstractControl): ValidationErrors | null {
     const password = control.parent?.get('password')?.value;
     const confirmPassword = control.value;
     if (!confirmPassword || !password) return { iguales: false };
     return confirmPassword === password ? null : { iguales: false };
   }
 
+  async onRegister() {
+    if (this.registerForm.invalid) {
+      this.registerForm.markAllAsTouched();
+      return;
+    }
 
-  onSubmit(){
-    console.log(this.registerForm.value);
+    const { email, password } = this.registerForm.value;
+
+    try {
+      const { user, session } = await this.supabase.signUp({
+        email: email!,
+        password: password!
+      });
+
+      console.log('✅ Usuario creado:', user);
+      console.log('🔑 Sesión activa:', session);
+
+      // Redirigir al dashboard (ejemplo)
+      this.router.navigate(['/tabs/tab1']);
+    } catch (error: any) {
+      console.error('❌ Error en registro:', error.message);
+      alert('Error: ' + error.message);
+    }
   }
 
   ngOnInit() { }
