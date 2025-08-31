@@ -1,53 +1,66 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      pruebaApp v1.00
+      pruebaApp v1.01
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
-  <!-- Centro vertical y horizontal -->
+<ion-content class="login-container">
+
   <ion-grid class="ion-justify-content-center ion-align-items-center" style="height: 100%;">
     <ion-row class="ion-justify-content-center">
       <ion-col size="12" size-md="8" size-lg="6">
 
-        <!-- Logo / Imagen -->
+        <!-- Logo -->
         <ion-img src="https://s3-alpha.figma.com/hub/file/1913095808/a7bdc469-cd70-4ea1-bb57-b59204ad8182-cover.png"
-          alt="Logo" style="width: 140px; height: auto; display: block; margin: 0 auto 24px;">
-        </ion-img>
+          alt="Logo" class="logo"></ion-img>
+
+        <!-- Título -->
+        <h1 class="titulo">Bienvenido</h1>
+        <p class="subtitulo">Inicia sesión para continuar</p>
 
         <!-- Inputs -->
-        <ion-list inset="true" lines="none">
+        <ion-list inset="true" lines="none" class="inputs">
           <ion-item>
             <ion-input type="email" label="Email" labelPlacement="floating" fill="solid" helperText="Ingresá tu email"
-              errorText="Email inválido" [(ngModel)]="email" required>
-            </ion-input>
+              errorText="Email inválido" [(ngModel)]="email" required></ion-input>
           </ion-item>
 
           <ion-item class="ion-margin-top">
-            <ion-input type="password" label="Password" labelPlacement="floating" fill="solid"
-              helperText="Mínimo 6 caracteres" errorText="Password inválido" [(ngModel)]="password" required>
-            </ion-input>
+            <ion-input type="password" label="Contraseña" labelPlacement="floating" fill="solid"
+              helperText="Mínimo 6 caracteres" errorText="Password inválido" [(ngModel)]="password"
+              required></ion-input>
           </ion-item>
         </ion-list>
 
-
+        <!-- Mensaje de error -->
         @if (mensaje) {
-
         <div class="ion-text-center">
           <ion-note color="danger">{{ mensaje }}</ion-note>
         </div>
         }
 
-
-        <!-- Botón -->
-        <ion-button expand="block" size="large" class="ion-margin-top" [disabled]="!email || !password"
-        style="margin-top: 8vh;"
+        <!-- Botón principal -->
+        <ion-button expand="block" size="large" class="boton-login" [disabled]="!email || !password"
           (click)="verificarCredenciales()">
           Ingresar
         </ion-button>
 
+        <!-- Botones de usuarios -->
+        <div class="usuarios">
+          <ion-button expand="block" size="medium" class="boton-usuario">
+            Ingresar con usuario 1
+          </ion-button>
+
+          <ion-button expand="block" size="medium" class="boton-usuario">
+            Ingresar con usuario 2
+          </ion-button>
+
+          <ion-button expand="block" size="medium" class="boton-usuario">
+            Ingresar con usuario 3
+          </ion-button>
+        </div>
       </ion-col>
     </ion-row>
   </ion-grid>

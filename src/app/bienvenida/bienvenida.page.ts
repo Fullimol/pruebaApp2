@@ -32,7 +32,7 @@ export class BienvenidaPage {
       // Redirigir a la página principal
       this.router.navigate(['/tabs/tab1']);
     } else {
-      this.mensaje = "mail o pass incorrectos";
+      this.mensaje = "(mail y/o contraseña incorrectos)";
       console.log("Credenciales inválidas");
     }
   }

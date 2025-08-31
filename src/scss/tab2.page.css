@@ -1,0 +1,14 @@
+#container {
+  text-align: center;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.button-container ion-button {
+  display: block;
+  margin: 5vh 15vh;
+  text-align: center;
+}/*# sourceMappingURL=tab2.page.css.map */
