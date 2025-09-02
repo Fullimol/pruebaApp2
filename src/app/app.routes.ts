@@ -4,8 +4,8 @@ import { TabsPage } from './tabs/tabs.page';
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: '/bienvenida',
     pathMatch: 'full',
+    loadComponent: () => import('./splash/splash.page').then( m => m.SplashPage)
   },
   {
     path: 'bienvenida',
@@ -42,5 +42,9 @@ export const routes: Routes = [
         //   pathMatch: 'full',
         // },
       ],
-    }
+    },
+  {
+    path: 'splash',
+    loadComponent: () => import('./splash/splash.page').then( m => m.SplashPage)
+  }
 ];
