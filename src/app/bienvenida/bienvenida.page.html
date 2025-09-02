@@ -35,9 +35,9 @@
           </ion-list>
 
           <!-- Mensaje de error -->
-          @if (mensaje) {
+          @if (mensajeErrorLogin()) {
           <div class="ion-text-center">
-            <ion-note color="danger">{{ mensaje }}</ion-note>
+            <ion-note color="danger">{{mensajeErrorLogin() }}</ion-note>
           </div>
           }
 

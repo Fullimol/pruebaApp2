@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { IonImg, IonToolbar, IonContent, IonHeader, IonTitle, IonInput, IonList, IonItem, IonRow, IonCol, IonButton, IonNote, IonGrid, } from "@ionic/angular/standalone";
@@ -14,9 +14,9 @@ export class RegistroComponent implements OnInit {
   private supabase = inject(SupabaseService); // 👈 inyecta el servicio
   private router = inject(Router); // 👈 para redirigir después del registro
 
+  mensajeErrorRegistro = signal<string>('')
   email = ""
   password = ""
-  mensaje: string = ""
 
 
   //formulario de registro:
@@ -35,6 +35,7 @@ export class RegistroComponent implements OnInit {
   }
 
   async onRegister() {
+    this.mensajeErrorRegistro.set('');
     if (this.registerForm.invalid) {
       this.registerForm.markAllAsTouched();
       return;
@@ -55,7 +56,7 @@ export class RegistroComponent implements OnInit {
       this.router.navigate(['/tabs/tab1']);
     } catch (error: any) {
       console.error('❌ Error en registro:', error.message);
-      alert('Error: ' + error.message);
+      this.mensajeErrorRegistro.set('Email ya registrado');
     }
   }
 

@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { IonHeader, IonTitle, IonToolbar, IonButton, IonFooter, IonInput, IonNote, IonImg, IonContent, IonList, IonRow, IonGrid, IonCol, IonItem } from '@ionic/angular/standalone';
 import { RouterModule, Router, RouterLink } from '@angular/router';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -16,9 +16,9 @@ export class BienvenidaPage {
   private supabase = inject(SupabaseService);
   constructor(private router: Router) { }
 
+  mensajeErrorLogin = signal<string>('');
   email = ""
   password = ""
-  mensaje: string = ""
 
   loginForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
@@ -27,6 +27,7 @@ export class BienvenidaPage {
 
   //accion de boton login:
   async onLogin() {
+    this.mensajeErrorLogin.set('');
     if (this.loginForm.invalid) {
       this.loginForm.markAllAsTouched();
       return;
@@ -46,6 +47,7 @@ export class BienvenidaPage {
       this.loginForm.reset();
     } catch (error: any) {
       console.error("Error en login:", error.message);
+      this.mensajeErrorLogin.set('Usuario y/o contraseña incorrectos');
     }
   }
 

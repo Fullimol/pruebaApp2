@@ -42,9 +42,9 @@
           </ion-list>
 
           <!-- Mensaje de error -->
-          @if (mensaje) {
+          @if (mensajeErrorRegistro()) {
           <div class="ion-text-center">
-            <ion-note color="danger">{{ mensaje }}</ion-note>
+            <ion-note color="danger">{{ mensajeErrorRegistro() }}</ion-note>
           </div>
           }
 
