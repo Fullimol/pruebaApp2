@@ -13,7 +13,7 @@ export class AppComponent {
 
   constructor() {
     this.configureStatusBar();
-    this.showSplash();
+    // this.showSplash(); // Esto lo comento porque ya el splashscreen lo hace cargando la page "splash", pero aveces tiene un error y como que se superpone la imagen de plash por encima de esto y es como que se tilda.... 
   }
 
   async configureStatusBar() {

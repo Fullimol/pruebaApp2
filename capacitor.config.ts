@@ -10,13 +10,12 @@ const config: CapacitorConfig = {
     },
     SplashScreen: {
       launchAutoHide: true,
-      backgroundColor: "#53005C",   // mismo color que el fondo de tu splash.png
+      launchShowDuration: 1000,       // 👈 desactiva el splash nativo en un segundo Con esto QUITE la pantallita blanca que aparecía.
+      backgroundColor: "#53005C",  // mismo color de tu splash page para que no se note el salto
       androidScaleType: "CENTER_CROP",
       showSpinner: false,
     }
   }
 };
-
-
 
 export default config;
